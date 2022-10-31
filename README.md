@@ -1,4 +1,4 @@
-# Password_manager
+# Password Manager
 Enter login credtionals for any website.
 
 Saves login credtionals locally to a json file on your machine.
