@@ -1,6 +1,8 @@
 # Password_manager
 Enter login credtionals for any website.
 
-Saves login credtionals locally to a text file on your machine.
+Saves login credtionals locally to a json file on your machine.
 
-<img width="546" alt="Screenshot 2022-10-31 at 2 02 52 AM" src="https://user-images.githubusercontent.com/114730258/198950289-7131266c-14b2-424e-8029-2c0ea08b264d.png">
+![output](https://user-images.githubusercontent.com/114730258/198953154-25dfef31-b2b9-43c9-a52e-ad71c5ba2bfe.gif)
+
+
