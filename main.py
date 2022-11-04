@@ -7,28 +7,91 @@ import pyperclip
 import json
 import os.path
 
+# ---------------------------- Encode Password ------------------------------- #
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+            'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+            'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+
+def encode(password):
+    cipher_text = ""
+    for letter in password:
+        if letter in alphabet:
+            position = alphabet.index(letter)
+            new_position = position + 3
+            cipher_text += alphabet[new_position]
+        else:
+            cipher_text += letter
+    return cipher_text
+
+
+def decode(password):
+    cipher_text = ""
+    for letter in password:
+        if letter in alphabet:
+            position = alphabet.index(letter)
+            new_position = position - 3
+            cipher_text += alphabet[new_position]
+        else:
+            cipher_text += letter
+    return cipher_text
+
 
 # ---------------------------- Login ------------------------------- #
 def pass_login(*args):
     global bool
-    with open('password.txt') as data:
+    try:
+        data = open('password.txt')  # khoor
+        get = password_entry.get()  # hello
+        decrypted_password = decode(data.read()) # hello
+        if decrypted_password == get: #hello == #
+            bool = True
+            win1.destroy()
+        else:
+            popup = messagebox.showinfo(title="Incorrect", message="The password is incorrect")
+
+    except FileNotFoundError:
+        data = open('password.txt', 'w')
         get = password_entry.get()
-        if get == data.read():
+        encrypted_password = encode(get)
+        data.write(encrypted_password)
+
+        data = open('password.txt', 'r')
+        pass_data = data.read()
+        decrypted_password = decode(pass_data)
+
+        if get == decrypted_password:
             bool = True
             win1.destroy()
 
-win1 = Tk()
-win1.title("Log-in")
-win1.eval('tk::PlaceWindow . center')
-password_label = Label(text='Enter your password: ')
-password_label.grid(row=0, column=0)
-password_entry = Entry(width=25)
-password_entry.grid(row=1, column=0)
-password_entry.focus()
-password_button = Button(text='Enter', width=50, command=pass_login)
-win1.bind('<Return>', pass_login)
-password_button.grid(row=2, column=0)
-win1.mainloop()
+
+if os.path.exists('password.txt'):
+    win1 = Tk()
+    win1.title("Log-in")
+    win1.eval('tk::PlaceWindow . center')
+    password_label = Label(text='Enter your password: ')
+    password_label.grid(row=0, column=0)
+    password_entry = Entry(width=25)
+    password_entry.grid(row=1, column=0)
+    password_entry.focus()
+    password_button = Button(text='Enter', width=50, command=pass_login)
+    win1.bind('<Return>', pass_login)
+    password_button.grid(row=2, column=0)
+    win1.mainloop()
+
+else:
+    win1 = Tk()
+    win1.title("Log-in")
+    win1.eval('tk::PlaceWindow . center')
+    password_label = Label(text='Create your password: ')
+    password_label.grid(row=0, column=0)
+    password_entry = Entry(width=25)
+    password_entry.grid(row=1, column=0)
+    password_entry.focus()
+    password_button = Button(text='Enter', width=50, command=pass_login)
+    win1.bind('<Return>', pass_login)
+    password_button.grid(row=2, column=0)
+    win1.mainloop()
 
 
 def pass_manager():
@@ -111,7 +174,7 @@ def pass_manager():
 
     canvas = Canvas(width=200, height=200, bg='white', highlightthickness=0)
     logo_photo = PhotoImage(
-        file='/Users/saifc/Documents/GitHub/Python/100 days of code/day29/password_manager/logo.png')
+        file='logo.png')
     canvas.create_image(100, 100, image=logo_photo)
     canvas.grid(column=1, row=0)
 
