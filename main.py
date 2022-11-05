@@ -41,10 +41,11 @@ def decode(password):
 def pass_login(*args):
     global bool
     try:
-        data = open('password.txt')  # khoor
-        get = password_entry.get()  # hello
-        decrypted_password = decode(data.read()) # hello
-        if decrypted_password == get: #hello == #
+        data = open('password.txt')
+        data.flush()
+        get = password_entry.get()
+        decrypted_password = decode(data.read())
+        if decrypted_password == get:
             bool = True
             win1.destroy()
         else:
@@ -209,7 +210,7 @@ def pass_manager():
     email_entry = Entry(width=35, bg='white', highlightthickness=0, fg='black')
     email_entry.config(insertbackground='black')
     email_entry.grid(column=1, row=2, columnspan=2)
-    email_entry.insert(0, "chathasaif@gmail.com")
+    email_entry.insert(0, "example@gmail.com")
 
     password_entry = Entry(width=21, bg='white', highlightthickness=0, fg='black')
     password_entry.config(insertbackground='black')
