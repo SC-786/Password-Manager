@@ -170,6 +170,18 @@ def pass_manager():
     win.title("Password Manager")
     win.config(padx=50, pady=50, bg='white')
 
+    w = 550  # Width
+    h = 400  # Height
+
+    screen_width = win.winfo_screenwidth()  # Width of the screen
+    screen_height = win.winfo_screenheight()  # Height of the screen
+
+    # Calculate Starting X and Y coordinates for Window
+    x = (screen_width / 2) - (w / 2)
+    y = (screen_height / 2) - (h / 2)
+
+    win.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
     helv36 = font.Font(family='Arial', size=12, weight='normal')
 
     canvas = Canvas(width=200, height=200, bg='white', highlightthickness=0)
@@ -217,7 +229,6 @@ def pass_manager():
     search_button.grid(column=2, row=1, columnspan=2)
 
     win.mainloop()
-
 
 if bool == True:
     pass_manager()
