@@ -42,7 +42,6 @@ def pass_login(*args):
     global bool
     try:
         data = open('password.txt')
-        data.flush()
         get = password_entry.get()
         decrypted_password = decode(data.read())
         if decrypted_password == get:
